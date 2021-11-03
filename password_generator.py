@@ -38,6 +38,14 @@ def generateRandomPIN(length=4):
         password += str(secrets.choice(numbers))
     return password
 
+def improvePassword(current_password=""):
+    password = current_password[:len(current_password)//2]
+    password += str(secrets.choice(punctuation))
+    password += current_password[len(current_password)//2+1:]
+    password += str(secrets.choice(password_components))
+    password += str(secrets.choice(numbers))
+    return password
+
 def handleError(error_str):
     print(f">> Error: {error_str}")
 
@@ -113,6 +121,16 @@ _________________________________
 
         while(repeat == "y"):
             print(f">> {generateRandomPIN(length)}")
+            repeat = input("\nRepeat: [y/n] > ")
+        input()
+    if command == 4:
+        repeat = "y"
+
+        print("Improve Existing Password")
+        current_password = input("Existing Password > ")
+
+        while(repeat == "y"):
+            print(f">> {improvePassword(current_password)}")
             repeat = input("\nRepeat: [y/n] > ")
         input()
     elif command == 5:
