@@ -38,6 +38,9 @@ def generateRandomPIN(length=4):
         password += str(secrets.choice(numbers))
     return password
 
+def generateSecretKey(length=16):
+    return secrets.token_urlsafe(length)
+
 def improvePassword(current_password=""):
     password = current_password[:len(current_password)//2]
     password += str(secrets.choice(punctuation))
@@ -66,9 +69,10 @@ _________________________________
  1. Generate Random Password
  2. Generate Password from Input
  3. Generate PIN Number
- 4. Improve Existing Password
- 5. Toggle Include Punctuation: {include_punctuation}
- 6. Exit
+ 4. Generate Secret Key
+ 5. Improve Existing Password
+ 6. Toggle Include Punctuation: {include_punctuation}
+ 7. Exit
 _________________________________
 > """
     )
@@ -89,7 +93,6 @@ _________________________________
         while(repeat == "y"):
             print(f">> {generateRandomPassword(length)}")
             repeat = input("\nRepeat: [y/n] > ")
-        input()
     elif command == 2:
         repeat = "y"
 
@@ -110,8 +113,7 @@ _________________________________
             print(f">> {generatePasswordFromInput(length, inputs)}")
             repeat = input("\nRepeat: [y/n] > ")
         
-        input()
-    if command == 3:
+    elif command == 3:
         repeat = "y"
 
         print("Generate PIN Number")
@@ -122,8 +124,18 @@ _________________________________
         while(repeat == "y"):
             print(f">> {generateRandomPIN(length)}")
             repeat = input("\nRepeat: [y/n] > ")
-        input()
-    if command == 4:
+    elif command == 4:
+        repeat = "y"
+
+        print("Generate Secret Key")
+        length = input("Key Length > ")
+        if (length.isnumeric()):
+            length = int(length)
+
+        while(repeat == "y"):
+            print(f">> {generateSecretKey(length)}")
+            repeat = input("\nRepeat: [y/n] > ")
+    elif command == 5:
         repeat = "y"
 
         print("Improve Existing Password")
@@ -132,14 +144,13 @@ _________________________________
         while(repeat == "y"):
             print(f">> {improvePassword(current_password)}")
             repeat = input("\nRepeat: [y/n] > ")
-        input()
-    elif command == 5:
+    elif command == 6:
         include_punctuation = not include_punctuation
         if(include_punctuation):
             punctuation = list(string.punctuation)
         else:
             punctuation = []
-    elif command == 6:
+    elif command == 7:
         exit_program = True
     else:
         handleError("Invalid Command.")
