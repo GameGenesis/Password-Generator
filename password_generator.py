@@ -3,8 +3,6 @@ import string
 import secrets
 import random
 
-exit_program = False
-
 letters = list(string.ascii_letters)
 numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 include_punctuation = True
@@ -58,7 +56,7 @@ def clearConsole():
         command = 'cls'
     os.system(command)
 
-while not exit_program: #While the program is running, display the command menu and ask the user to enter a command
+while True: #While the program is running, display the command menu and ask the user to enter a command
     password_components = letters + numbers + punctuation
     clearConsole()
     command = input(
@@ -151,7 +149,7 @@ _________________________________
         else:
             punctuation = []
     elif command == 7:
-        exit_program = True
+        break
     else:
         handleError("Invalid Command.")
         print("_________________________________")
